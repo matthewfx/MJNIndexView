@@ -65,7 +65,7 @@ Your UIViewController must implement MJNIndexViewDataSource protocol methods. Th
 
 You can customize the look and behaviour of MJNIndex by tweaking more than 20 parameters. You can experiment with the most of them in the demo app.
 
-If you want to change items in the index or most of its parameters after the MJNIndexView  was added to the superView you should use the method – (void)refreshIndexItems to recalculate every item position, size etc.
+If you want to change items in the index or most of its parameters after the MJNIndexView  was added to the superView you should use the method `– (void)refreshIndexItems` to recalculate every item position, size etc.
 
 ### To do
 
