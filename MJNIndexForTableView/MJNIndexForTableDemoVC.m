@@ -165,7 +165,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
     // adding settings button
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [settingsButton setImage:[UIImage imageNamed:@"settingsButton.png"] forState:UIControlStateNormal];
-    //[settingsButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchDown];
+    [settingsButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchDown];
     settingsButton.frame = CGRectMake(0.0, 0.0, 20.0, 40.0);
     settingsButton.center = CGPointMake(settingsButton.center.x, self.view.bounds.size.height / 2.0);
     [self.view addSubview:settingsButton];
