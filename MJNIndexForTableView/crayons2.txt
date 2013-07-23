@@ -1,0 +1,83 @@
+Almond #EED9C4
+Antique Brass #C88A65
+Apricot #FDD5B1
+Aquamarine #71D9E2
+Asparagus #7BA05B
+Atomic Tangerine #FF9966
+Banana Mania #FBE7B2
+Beaver #926F5B
+Bittersweet #FE6F5E
+Black #000000
+Blizzard Blue #A3E3ED
+Blue #0066FF
+Blue Bell #9999CC
+Blue Green #0095B6
+Blue Violet #6456B7
+Brick Red #C62D42
+Brink Pink #FB607F
+Brown #AF593E
+Burnt Orange #FF7034
+Burnt Sienna #E97451
+Cadet Blue #A9B2C3
+Canary #FFFF99
+Caribbean Green #00CC99
+Carnation Pink #FFA6C9
+Cerise #DA3287
+Cerulean #02A4D3
+Chartreuse #FF9966
+Chestnut #B94E48
+Copper #DA8A67
+Cornflower #93CCEA
+Cotton Candy #FFB7D5
+Cranberry #DB5079
+Dandelion #FED85D
+Denim #1560BD
+Desert Sand #EDC9AF
+Eggplant #614051
+Electric Lime #CCFF00
+Fern #63B76C
+Flesh #FFCBA4
+Forest Green #5FA777
+Fuchsia #C154C1
+Fuzzy Wuzzy Brown #C45655
+Gold #E6BE8A
+Goldenrod #FCD667
+Granny Smith Apple #9DE093
+Gray #8B8680
+Green #01A368
+Green Yellow #F1E788
+Happy Ever After #6CDA37
+Hot Magenta #FF00CC
+Inch Worm #B0E313
+Indian Red #B94E48
+Indigo #4F69C6
+Jazzberry Jam #A50B5E
+Jungle Green #29AB87
+Kelly Green #FFFFFF
+Kelp Green #FFFFFF
+Key Lime #FFFFFF
+Khaki #FFFFFF
+Kiwi green #FFFFFF
+Kohl #FFFFFF
+Kentucky blues grass #FFFFFF
+Kinatone #FFFFFF
+Laser Lemon #FFFF66
+Lavender #FBAED2
+Lapis #FFFFFF
+Lavender #FFFFFF
+Lavender Blush #FFFFFF
+Lavender Gray #FFFFFF
+Lavender Magenta #FFFFFF
+Lawn Green #FFFFFF
+Lazuli #FFFFFF
+Lemon #FFFFFF
+Lemon Chiffon #FFFFFF
+Lemon Yellow #FFFFFF
+Light Blue #FFFFFF
+Light Pink #FFFFFF
+Lilac #FFFFFF
+Lime #FFFFFF
+Lime Green #FFFFFF
+Lincoln Green #FFFFFF
+Linen #FFFFFF
+Lovat #FFFFFF
