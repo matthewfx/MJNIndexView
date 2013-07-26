@@ -3,7 +3,10 @@ iOS - MJNIndexView
 
 MJNIndexView is an UIControl which displays an alternative index for UITableView. I wanted to mimic the index designed by Jeremy Olson's Tapity for their Languages app. I think their idea of implementing index is brilliant and it is one of the best examples of great UX. I hope more apps are going to use similar indices instead of the generic ones.
 
-
+![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView01.png)
+![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView02.png)
+![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView03.png)
+![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView04.png)
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/uV3bkPkC-GQ/0.jpg)](http://www.youtube.com/watch?v=uV3bkPkC-GQ)
 
 ### Example Code
@@ -70,6 +73,7 @@ If you want to change items in the index or most of its parameters after the MJN
 ### To do
 
 •	Improve a curtain fade (it could behave strange when you use very large value for the right margin).
+
 •	Cocoapod
 
 ### Credits
