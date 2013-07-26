@@ -4,6 +4,8 @@
  www.appcowboys.com
  All rights reserved.
  
+ This UIControl was inspired by Languages app by Jeremy's Olson Tapity.
+ 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
  
