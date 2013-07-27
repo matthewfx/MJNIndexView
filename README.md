@@ -73,9 +73,11 @@ If you want to change items in the index or most of its parameters after the MJN
 
 ### To do
 
-•	Improve a curtain fade (it could behave strange when you use very large value for the right margin).
+• Improve a curtain fade (it could behave strange when you use very large value for the right margin).
 
-•	Cocoapod
+• Improve performance on older devices
+
+• Cocoapod
 
 ### Credits
 
