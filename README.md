@@ -8,6 +8,9 @@ MJNIndexView is a highly customizable UIControl which displays an alternative in
 ![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView02.png)
 ![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView03.png)
 ![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView04.png)
+
+### Youtube video
+
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/uV3bkPkC-GQ/0.jpg)](http://www.youtube.com/watch?v=uV3bkPkC-GQ)
 
 ### Example Code
