@@ -1,7 +1,7 @@
 iOS - MJNIndexView
 ==================
 
-MJNIndexView is an UIControl which displays an alternative index for UITableView. I wanted to mimic the index designed by Jeremy Olson's Tapity for their Languages app. I think their idea of implementing index is brilliant and it is one of the best examples of great UX. I hope more apps are going to use similar indices instead of the generic ones.
+MJNIndexView is a highly customizable UIControl which displays an alternative index for UITableView. I wanted to mimic the index designed by Jeremy Olson's Tapity for their Languages app. I think their idea of implementing index is brilliant and it is one of the best examples of great UX. I hope more apps are going to use similar indices instead of the generic ones.
 
 ![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView01.png)
 ![Screenshot](https://github.com/matthewfx/MJNIndexView/raw/master/MJNIndexView02.png)
