@@ -339,7 +339,7 @@
             // setting zPosition a little above because we might need to put something below
             NSNumber *zPosition = @(5.0);
             
-            NSMutableDictionary *itemAttributes = [@{@"item":item,
+            NSCache *itemAttributes = [@{@"item":item,
                                                    @"origin":newValueForPoint,
                                                    @"position":newValueForPoint,
                                                    @"font":self.font,
@@ -367,13 +367,13 @@
 // reseting positions of index items
 - (void) resetPosition
 {
-    for (NSMutableDictionary *itemAttributes in self.itemsAtrributes){
-        CGPoint origin = [itemAttributes[@"origin"] CGPointValue];
-        itemAttributes[@"position"] = [NSValue valueWithCGPoint:origin];
-        itemAttributes[@"font"] = self.font;
-        itemAttributes[@"alpha"] = @(1.0);
-        itemAttributes[@"color"] = self.fontColor;
-        itemAttributes[@"zPosition"] = @(5.0);
+    for (NSCache *itemAttributes in self.itemsAtrributes){
+        CGPoint origin = [[itemAttributes objectForKey:@"origin"] CGPointValue];
+        [itemAttributes setObject:[NSValue valueWithCGPoint:origin] forKey:@"position"];
+        [itemAttributes setObject:self.font forKey:@"font"];
+        [itemAttributes setObject:@(1.0) forKey:@"alpha"];
+        [itemAttributes setObject:self.fontColor forKey:@"color"];
+        [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
 
     }
     
@@ -390,12 +390,12 @@
     CGFloat verticalPos = self.firstItemOrigin.y;
   
     int section = 0;
-    for (NSMutableDictionary *itemAttributes in self.itemsAtrributes) {
+    for (NSCache *itemAttributes in self.itemsAtrributes) {
         
-        CGFloat alpha = [itemAttributes[@"alpha"] floatValue];
-        CGPoint point = [itemAttributes[@"position"] CGPointValue];
-        CGPoint origin = [itemAttributes[@"origin"] CGPointValue];
-        CGFloat fontSize = [itemAttributes[@"fontSize"] floatValue];
+        CGFloat alpha = [[itemAttributes objectForKey: @"alpha"] floatValue];
+        CGPoint point = [[itemAttributes objectForKey:@"position"] CGPointValue];
+        CGPoint origin = [[itemAttributes objectForKey:@"origin"] CGPointValue];
+        CGFloat fontSize = [[itemAttributes objectForKey:@"fontSize"] floatValue];
         UIColor *fontColor;
         
         BOOL inRange = NO;
@@ -426,7 +426,7 @@
     
             CGFloat zPosition = self.rangeOfDeflection - fabs(point.y - location.y) * differenceMappedToRange;
             
-            itemAttributes[@"zPosition"] = @(5.0 + zPosition);
+            [itemAttributes setObject:@(5.0 + zPosition) forKey:@"zPosition"];
             
             // calculating a fontIncrease factor of the deflected item
             CGFloat fontIncrease = (self.maxItemDeflection - (fabs(point.y - location.y)) *
@@ -449,9 +449,9 @@
                 alpha = colorChange;
             } else alpha = 1.0;
            
-            itemAttributes[@"font"]= [UIFont fontWithName:self.font.fontName size:fontSize];
+            [itemAttributes setObject:[UIFont fontWithName:self.font.fontName size:fontSize] forKey:@"font"];
             
-            itemAttributes[@"color"] = fontColor;
+            [itemAttributes setObject:fontColor forKey:@"color"];
             
             // checking if the item is the most deflected one -> it means it is the selected one 
             BOOL selectedInRange  = location.y > point.y - self.itemsOffset / 2.0 && location.y < point.y + self.itemsOffset / 2.0;
@@ -464,9 +464,9 @@
             if (selectedInRange || firstItemInRange || lastItemInRange) {
                 alpha = 1.0;
                 
-                itemAttributes[@"font"]= [UIFont fontWithName:self.selectedItemFont.fontName size:fontSize];
-                itemAttributes[@"color"] = self.selectedItemFontColor;
-                itemAttributes[@"zPosition"] = @(10.0);
+                [itemAttributes setObject:[UIFont fontWithName:self.selectedItemFont.fontName size:fontSize] forKey:@"font"];
+                [itemAttributes setObject:self.selectedItemFontColor forKey:@"color"];
+                [itemAttributes setObject:@(10.0) forKey:@"zPosition"];
                 if (!self.getSelectedItemsAfterPanGestureIsFinished && [self.section integerValue] != section) {
                     [self.dataSource sectionForSectionMJNIndexTitle:self.indexItems[section] atIndex:section];
                 }
@@ -476,6 +476,7 @@
             
             // we're marking these items as inRange items
             inRange = YES;
+
         }
         
         // if item is not in range we have to reset it's x position, alpha value, font name, size and color, zPosition
@@ -483,17 +484,17 @@
             
             point.x = origin.x;
             alpha = 1.0;
-            itemAttributes[@"font"] = self.font;
+            [itemAttributes setObject:self.font forKey:@"font"];
             fontColor = self.fontColor;
-            itemAttributes[@"color"] = self.fontColor;
-            itemAttributes[@"zPosition"] = @(5.0);
+            [itemAttributes setObject:self.fontColor forKey:@"color"];
+            [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
         }
         
         // we have to store some values in itemAtrributes array
         point.y = verticalPos;
         NSValue *newValueForPoint = [NSValue valueWithCGPoint:point];
-        itemAttributes[@"position"] = newValueForPoint;
-        itemAttributes[@"alpha"] = @(alpha);
+        [itemAttributes setObject:newValueForPoint forKey:@"position"];
+        [itemAttributes setObject:@(alpha) forKey:@"alpha"];
         verticalPos += self.itemsOffset;
         section ++;
     }
@@ -521,44 +522,51 @@
 #pragma mark drawing CATextLayers with indexitems
 - (void) drawIndex
 {
-    for (NSDictionary *item in self.itemsAtrributes) {
-        // getting attributes
-        CGPoint point = [item[@"position"] CGPointValue];
-        UIFont *currentFont = item[@"font"];
-        NSString *currentItem = item[@"item"];
-        CGSize textSize = [currentItem sizeWithFont:currentFont];
-        CATextLayer * singleItemTextLayer = item[@"layer"];
-        UIColor *fontColor = item[@"color"];
+    for (NSCache *itemAttributes in self.itemsAtrributes) {
+        // getting attributes necessary to check if we need to animate
+        
+        UIFont *currentFont = [itemAttributes objectForKey:@"font"];
+        CATextLayer * singleItemTextLayer = [itemAttributes objectForKey:@"layer"];
         
         // checking if all CATexts exists
         if ([self.itemsAtrributes count] != [self.layer.sublayers count] - 1) {
             [self.layer addSublayer:singleItemTextLayer];
         }
         
+        // checking if font size is different if it's different we have to animate CALayer
+        if (singleItemTextLayer.fontSize != currentFont.pointSize) {
+            // we have to animate several CALayers at once
+            [CATransaction begin];
+            
+            // if we need to animate faster we're changing the duration to be as short as possible
+            
+            if (!self.animate) [CATransaction setAnimationDuration:0.005];
+            else [CATransaction setAnimationDuration:0.2];
+            
+            // getting other attributes and updading CALayer
+            CGPoint point = [[itemAttributes objectForKey:@"position"] CGPointValue];
+            NSString *currentItem = [itemAttributes objectForKey:@"item"];
+            CGSize textSize = [currentItem sizeWithFont:currentFont];
+            UIColor *fontColor = [itemAttributes objectForKey:@"color"];
+            
+            singleItemTextLayer.zPosition = [[itemAttributes objectForKey:@"zPosition"] floatValue];
+            singleItemTextLayer.font = (__bridge CFTypeRef)(currentFont.fontName);
+            singleItemTextLayer.fontSize = currentFont.pointSize;
+            singleItemTextLayer.opacity = [[itemAttributes objectForKey:@"alpha"] floatValue];
+            singleItemTextLayer.string = currentItem;
+            singleItemTextLayer.backgroundColor = [UIColor clearColor].CGColor;
+            singleItemTextLayer.foregroundColor = fontColor.CGColor;
+            singleItemTextLayer.bounds = CGRectMake(0.0,
+                                                    0.0,
+                                                    textSize.width,
+                                                    textSize.height);
+            singleItemTextLayer.position = CGPointMake(point.x + textSize.width/2.0,
+                                                       point.y);
+            singleItemTextLayer.contentsScale = [[UIScreen mainScreen]scale];
+            
+            [CATransaction commit];
         
-        // we have to animate several CALayers at once 
-        [CATransaction begin];
-        
-        // if we need to animate faster we're changing the duration to be as short as possible
-        if (!self.animate) [CATransaction setAnimationDuration:0.005];
-        else [CATransaction setAnimationDuration:0.2];
-        
-        singleItemTextLayer.zPosition = [item[@"zPosition"] floatValue];
-        singleItemTextLayer.font = (__bridge CFTypeRef)(currentFont.fontName);
-        singleItemTextLayer.fontSize = currentFont.pointSize;
-        singleItemTextLayer.opacity = [item[@"alpha"] floatValue];
-        singleItemTextLayer.string = currentItem;
-        singleItemTextLayer.backgroundColor = [UIColor clearColor].CGColor;
-        singleItemTextLayer.foregroundColor = fontColor.CGColor;
-        singleItemTextLayer.bounds = CGRectMake(0.0,
-                                                0.0,
-                                                textSize.width,
-                                                textSize.height);
-        singleItemTextLayer.position = CGPointMake(point.x + textSize.width/2.0,
-                                                   point.y);
-        singleItemTextLayer.contentsScale = [[UIScreen mainScreen]scale];
-        
-        [CATransaction commit];
+        }
     }
 }
 
@@ -570,8 +578,8 @@
     int section = 0;
     
     // checking if item any item is touched
-    for (NSDictionary *itemAttributes in self.itemsAtrributes) {
-        CGPoint point = [itemAttributes[@"position"] CGPointValue];
+    for (NSCache *itemAttributes in self.itemsAtrributes) {
+        CGPoint point = [[itemAttributes objectForKey:@"position"] CGPointValue];
         CGPoint location = [touch locationInView:self];
         if (location.y > point.y - self.itemsOffset / 2.0  &&
             location.y < point.y + self.itemsOffset / 2.0) {
