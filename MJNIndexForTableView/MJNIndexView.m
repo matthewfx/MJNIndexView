@@ -31,6 +31,7 @@
 
 #import "MJNIndexView.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreText/CoreText.h>
 
 
 @interface MJNIndexView ()
@@ -46,6 +47,7 @@
 @property (nonatomic) CGPoint firstItemOrigin;
 @property (nonatomic) CGSize indexSize;
 @property (nonatomic, assign) CGFloat maxWidth;
+@property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic) BOOL animate;
 
 // curtain properties
@@ -238,6 +240,9 @@
         if (currentItemSize.width > self.maxItemDeflection) {
             self.maxItemDeflection = currentItemSize.width;
         }
+        if (currentItemSize.height > self.maxHeight) {
+            self.maxHeight = currentItemSize.height;
+        }
     }
     
     // ajdusting margins to ensure that minimum offset is 5.0 points
@@ -342,7 +347,7 @@
             NSCache *itemAttributes = [@{@"item":item,
                                                    @"origin":newValueForPoint,
                                                    @"position":newValueForPoint,
-                                                   @"font":self.font,
+                                                   @"font":(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL),
                                                    @"color":self.fontColor,
                                                    @"alpha":alpha,
                                                    @"zPosition":zPosition,
@@ -370,7 +375,7 @@
     for (NSCache *itemAttributes in self.itemsAtrributes){
         CGPoint origin = [[itemAttributes objectForKey:@"origin"] CGPointValue];
         [itemAttributes setObject:[NSValue valueWithCGPoint:origin] forKey:@"position"];
-        [itemAttributes setObject:self.font forKey:@"font"];
+        [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
         [itemAttributes setObject:@(1.0) forKey:@"alpha"];
         [itemAttributes setObject:self.fontColor forKey:@"color"];
         [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
@@ -449,7 +454,7 @@
                 alpha = colorChange;
             } else alpha = 1.0;
            
-            [itemAttributes setObject:[UIFont fontWithName:self.font.fontName size:fontSize] forKey:@"font"];
+            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, fontSize, NULL) forKey:@"font"];
             
             [itemAttributes setObject:fontColor forKey:@"color"];
             
@@ -464,7 +469,7 @@
             if (selectedInRange || firstItemInRange || lastItemInRange) {
                 alpha = 1.0;
                 
-                [itemAttributes setObject:[UIFont fontWithName:self.selectedItemFont.fontName size:fontSize] forKey:@"font"];
+                [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, fontSize, NULL) forKey:@"font"];
                 [itemAttributes setObject:self.selectedItemFontColor forKey:@"color"];
                 [itemAttributes setObject:@(10.0) forKey:@"zPosition"];
                 if (!self.getSelectedItemsAfterPanGestureIsFinished && [self.section integerValue] != section) {
@@ -484,7 +489,7 @@
             
             point.x = origin.x;
             alpha = 1.0;
-            [itemAttributes setObject:self.font forKey:@"font"];
+            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
             fontColor = self.fontColor;
             [itemAttributes setObject:self.fontColor forKey:@"color"];
             [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
@@ -525,16 +530,16 @@
     for (NSCache *itemAttributes in self.itemsAtrributes) {
         // getting attributes necessary to check if we need to animate
         
-        UIFont *currentFont = [itemAttributes objectForKey:@"font"];
+        CTFontRef currentFont = (__bridge CTFontRef)[itemAttributes objectForKey:@"font"];
         CATextLayer * singleItemTextLayer = [itemAttributes objectForKey:@"layer"];
         
         // checking if all CATexts exists
-        if ([self.itemsAtrributes count] != [self.layer.sublayers count] - 1) {
+        if ([self.itemsAtrributes count] > [self.layer.sublayers count] - 1) {
             [self.layer addSublayer:singleItemTextLayer];
         }
         
         // checking if font size is different if it's different we have to animate CALayer
-        if (singleItemTextLayer.fontSize != currentFont.pointSize) {
+        if (singleItemTextLayer.fontSize != CTFontGetSize(currentFont)) {
             // we have to animate several CALayers at once
             [CATransaction begin];
             
@@ -546,12 +551,27 @@
             // getting other attributes and updading CALayer
             CGPoint point = [[itemAttributes objectForKey:@"position"] CGPointValue];
             NSString *currentItem = [itemAttributes objectForKey:@"item"];
-            CGSize textSize = [currentItem sizeWithFont:currentFont];
+            
+            CFStringRef stringRef = (__bridge CFStringRef)currentItem;
+            CFMutableAttributedStringRef attrStr = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+            CFAttributedStringReplaceString (attrStr, CFRangeMake(0, 0), stringRef);
+            CTTextAlignment alignment = kCTJustifiedTextAlignment;
+            CTParagraphStyleSetting _settings[] = { {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment} };
+            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(_settings, sizeof(_settings) / sizeof(_settings[0]));
+            CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTParagraphStyleAttributeName, paragraphStyle);
+            CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTFontAttributeName, currentFont);
+            CFRelease(paragraphStyle);
+            
+            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrStr);
+            CFRelease(attrStr);
+            
+            CGSize textSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, currentItem.length), NULL, CGSizeMake(self.maxWidth, self.maxHeight), NULL);
+            CFRelease(framesetter);
             UIColor *fontColor = [itemAttributes objectForKey:@"color"];
             
             singleItemTextLayer.zPosition = [[itemAttributes objectForKey:@"zPosition"] floatValue];
-            singleItemTextLayer.font = (__bridge CFTypeRef)(currentFont.fontName);
-            singleItemTextLayer.fontSize = currentFont.pointSize;
+            singleItemTextLayer.font = currentFont;
+            singleItemTextLayer.fontSize = CTFontGetSize(currentFont);
             singleItemTextLayer.opacity = [[itemAttributes objectForKey:@"alpha"] floatValue];
             singleItemTextLayer.string = currentItem;
             singleItemTextLayer.backgroundColor = [UIColor clearColor].CGColor;

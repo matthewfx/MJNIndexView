@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FB6BFAB17F2BC00008D4223 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB6BFAA17F2BC00008D4223 /* CoreText.framework */; };
 		402F9A8D1799AAE7001CEB34 /* crayons2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 402F9A8C1799AAE7001CEB34 /* crayons2.txt */; };
 		402F9A961799B476001CEB34 /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 402F9A8E1799B476001CEB34 /* closeButton.png */; };
 		402F9A971799B476001CEB34 /* closeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 402F9A8F1799B476001CEB34 /* closeButton@2x.png */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FB6BFAA17F2BC00008D4223 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		402F9A8C1799AAE7001CEB34 /* crayons2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crayons2.txt; sourceTree = "<group>"; };
 		402F9A8E1799B476001CEB34 /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
 		402F9A8F1799B476001CEB34 /* closeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeButton@2x.png"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FB6BFAB17F2BC00008D4223 /* CoreText.framework in Frameworks */,
 				409C7C59177C5EF200BD4EEE /* QuartzCore.framework in Frameworks */,
 				409C7C30177C560100BD4EEE /* UIKit.framework in Frameworks */,
 				409C7C32177C560100BD4EEE /* Foundation.framework in Frameworks */,
@@ -119,6 +122,7 @@
 		409C7C2E177C560100BD4EEE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FB6BFAA17F2BC00008D4223 /* CoreText.framework */,
 				409C7C58177C5EF200BD4EEE /* QuartzCore.framework */,
 				409C7C2F177C560100BD4EEE /* UIKit.framework */,
 				409C7C31177C560100BD4EEE /* Foundation.framework */,
