@@ -565,7 +565,7 @@
             CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrStr);
             CFRelease(attrStr);
             
-            CGSize textSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, currentItem.length), NULL, CGSizeMake(self.maxWidth, self.maxHeight), NULL);
+            CGSize textSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, currentItem.length), NULL, CGSizeMake(self.maxWidth, self.maxHeight*2.0), NULL);
             CFRelease(framesetter);
             UIColor *fontColor = [itemAttributes objectForKey:@"color"];
             
