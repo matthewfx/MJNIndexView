@@ -534,7 +534,7 @@
         CATextLayer * singleItemTextLayer = [itemAttributes objectForKey:@"layer"];
         
         // checking if all CATexts exists
-        if ([self.itemsAtrributes count] > [self.layer.sublayers count] - 1) {
+        if ([self.itemsAtrributes count] != [self.layer.sublayers count] - 1) {
             [self.layer addSublayer:singleItemTextLayer];
         }
         
