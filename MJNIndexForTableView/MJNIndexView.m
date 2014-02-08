@@ -68,7 +68,7 @@
 // we need to synthetise fontColor because we need our own setter and getter methods
 @synthesize fontColor = _fontColor;
 
-#define debug 1
+#define debug 0
 
 #pragma mark getters
 
@@ -234,7 +234,7 @@
         self.itemsAtrributes = nil;
     }
     
-    if (self.gradientLayer) [self.gradientLayer removeFromSuperlayer];
+//    if (self.gradientLayer) [self.gradientLayer removeFromSuperlayer];
     
     
     self.indexItems = [self.dataSource sectionIndexTitlesForMJNIndexView:self];
