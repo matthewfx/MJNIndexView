@@ -703,7 +703,11 @@
     CGFloat currentY = [touch locationInView:self].y;
     CGFloat prevY = [touch previousLocationInView:self].y;
     
-    [self showCurtain];
+    
+    if (self.curtainColor) {
+        [self showCurtain];
+    }
+    
         
     // if pan is longer than three pixel we need to accelerate animation by setting self.animate to NO
     if (fabs(currentY - prevY) > 3.0) {
@@ -737,7 +741,9 @@
     // if pan stopped we can deacellerate animation, reset position and hide curtain
     self.animate = YES;
     [self resetPosition];
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
     
 }
 
@@ -750,7 +756,9 @@
     // if touch was canceled we reset everything
     self.animate = YES;
     [self resetPosition];
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
     }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
@@ -811,7 +819,9 @@
    
     // curtain is added now we have to hide it first
     self.curtain = YES;
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
 }
 
 // hiding the curtain
