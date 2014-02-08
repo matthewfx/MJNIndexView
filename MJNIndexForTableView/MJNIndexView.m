@@ -34,6 +34,8 @@
 #import <CoreText/CoreText.h>
 
 
+
+
 @interface MJNIndexView ()
 
 // item properties
@@ -469,7 +471,7 @@
             if (selectedInRange || firstItemInRange || lastItemInRange) {
                 alpha = 1.0;
                 
-                [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, fontSize, NULL) forKey:@"font"];
+                [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.selectedItemFont.fontName, fontSize, NULL) forKey:@"font"];
                 [itemAttributes setObject:self.selectedItemFontColor forKey:@"color"];
                 [itemAttributes setObject:@(10.0) forKey:@"zPosition"];
                 if (!self.getSelectedItemsAfterPanGestureIsFinished && [self.section integerValue] != section) {
