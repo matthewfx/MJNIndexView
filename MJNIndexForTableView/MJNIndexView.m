@@ -51,6 +51,7 @@
 @property (nonatomic, assign) CGFloat maxWidth;
 @property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic) BOOL animate;
+@property (nonatomic) int actualRangeOfDeflection;
 
 // curtain properties
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
@@ -334,7 +335,12 @@
     }
     
     // checking if range of items to deflect is not too big
-    if (self.rangeOfDeflection > [self.indexItems count]/2 - 1) self.rangeOfDeflection = [self.indexItems count]/2 - 1;
+    if (self.indexItems.count == 1) {
+        // if there is only one item in index there is no need to animate index
+        self.actualRangeOfDeflection = 0;
+    } else if (self.rangeOfDeflection > ([self.indexItems count]/2 - 1)) { // if items range of deflection is bigger than half of items in index we should set it to exact half of items number
+        self.actualRangeOfDeflection = [self.indexItems count]/2;
+    } else self.actualRangeOfDeflection = self.rangeOfDeflection;
 }
 
 
@@ -477,16 +483,16 @@
         
         // we have to map amplitude of deflection
         
-        float mappedAmplitude = self.maxItemDeflection / self.itemsOffset / ((float)self.rangeOfDeflection);
+        float mappedAmplitude = self.maxItemDeflection / self.itemsOffset / ((float)self.actualRangeOfDeflection);
         
         // now we are checking if touch is within the range of items we would like to deflect
-        BOOL min = location.y > point.y - ((float)self.rangeOfDeflection * self.itemsOffset);
-        BOOL max = location.y < point.y + ((float)self.rangeOfDeflection * self.itemsOffset);
+        BOOL min = location.y > point.y - ((float)self.actualRangeOfDeflection * self.itemsOffset);
+        BOOL max = location.y < point.y + ((float)self.actualRangeOfDeflection * self.itemsOffset);
         
         if (min && max) {
             
             // these calculations are necessary to make our deflection not linear
-            float differenceMappedToAngle = 90.0 / (self.itemsOffset * (float)self.rangeOfDeflection);
+            float differenceMappedToAngle = 90.0 / (self.itemsOffset * (float)self.actualRangeOfDeflection);
             float angle = (fabs(point.y - location.y)* differenceMappedToAngle);
             float angleInRadians = angle * (M_PI/180);
             float arcusTan = fabs(atan(angleInRadians));
@@ -497,9 +503,9 @@
             point.x = MIN(point.x, origin.x);
             
             // we have to map difference to range in order to determine right zPosition
-            float differenceMappedToRange = self.rangeOfDeflection / (self.rangeOfDeflection * self.itemsOffset);
+            float differenceMappedToRange = self.actualRangeOfDeflection / (self.actualRangeOfDeflection * self.itemsOffset);
     
-            CGFloat zPosition = self.rangeOfDeflection - fabs(point.y - location.y) * differenceMappedToRange;
+            CGFloat zPosition = self.actualRangeOfDeflection - fabs(point.y - location.y) * differenceMappedToRange;
             
             [itemAttributes setObject:@(5.0 + zPosition) forKey:@"zPosition"];
             
@@ -512,7 +518,7 @@
             fontSize = self.font.pointSize + fontIncrease;
             
             // calculating a color darkening factor
-            float differenceMappedToColorChange = 1.0 / (self.rangeOfDeflection * self.itemsOffset);
+            float differenceMappedToColorChange = 1.0 / (self.actualRangeOfDeflection * self.itemsOffset);
             CGFloat colorChange = fabs(point.y - location.y) * differenceMappedToColorChange;
             
             if (self.darkening) {
@@ -905,7 +911,7 @@
     }
     
     // first we have to check if the curtain is shown and a color for it is set
-    if (!self.curtain && self.curtainColor && self.curtainMoves) {
+    if (!self.curtain && self.curtainColor && self.curtainMoves && self.actualRangeOfDeflection > 0) {
         CGFloat curtainVerticalCenter;
         CGRect curtainBoundsRect;
         
