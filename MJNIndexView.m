@@ -31,6 +31,9 @@
 
 #import "MJNIndexView.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreText/CoreText.h>
+
+
 
 
 @interface MJNIndexView ()
@@ -46,7 +49,9 @@
 @property (nonatomic) CGPoint firstItemOrigin;
 @property (nonatomic) CGSize indexSize;
 @property (nonatomic, assign) CGFloat maxWidth;
+@property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic) BOOL animate;
+@property (nonatomic) int actualRangeOfDeflection;
 
 // curtain properties
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
@@ -64,10 +69,16 @@
 // we need to synthetise fontColor because we need our own setter and getter methods
 @synthesize fontColor = _fontColor;
 
+#define debug 0
+
 #pragma mark getters
 
 - (UIColor *)fontColor
 {
+//    if (debug == 1) {
+//        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+//    }
+    
     if (!_fontColor) {
         self.fontColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
     }
@@ -77,6 +88,10 @@
 
 - (UIColor *)selectedItemFontColor
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     if (!_selectedItemFontColor) {
         _selectedItemFontColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
         
@@ -90,6 +105,10 @@
 
 - (void)setCurtainColor:(UIColor *)curtainColor
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     _curtainColor = curtainColor;
     
 }
@@ -98,6 +117,11 @@
 
 - (void)setFontColor:(UIColor *)fontColor
 {
+    
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // we need to convert grayColor, whiteColor and blackColor to RGB;
     if ([fontColor isEqual:[UIColor grayColor]]) {
         _fontColor = [UIColor colorWithRed:0.5
@@ -119,6 +143,10 @@
 
 - (void)setCurtainFade:(CGFloat)curtainFade
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     if (self.gradientLayer) {
         [self.gradientLayer removeFromSuperlayer];
         self.gradientLayer = nil;
@@ -129,6 +157,10 @@
 
 - (void)setDataSource:(id<MJNIndexViewDataSource>)dataSource
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     _dataSource = dataSource;
     self.indexItems = [dataSource sectionIndexTitlesForMJNIndexView:self];
 }
@@ -138,6 +170,10 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     self = [super initWithFrame:frame];
     if (self) {
         // initialising all default values
@@ -163,6 +199,10 @@
 
 - (id)init
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     self = [self initWithFrame:CGRectZero];
     return self;
 }
@@ -170,6 +210,10 @@
 
 - (void)didMoveToSuperview
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     [self getAllItemsSize];
     [self initialiseAllAttributes];
     [self resetPosition];
@@ -178,6 +222,10 @@
 // refreshing our index items
 - (void)refreshIndexItems
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // if items existed we have to remove all sublayers from main layer
     if (self.itemsAtrributes) {
         for (NSDictionary *item in self.itemsAtrributes) {
@@ -187,7 +235,7 @@
         self.itemsAtrributes = nil;
     }
     
-    if (self.gradientLayer) [self.gradientLayer removeFromSuperlayer];
+//    if (self.gradientLayer) [self.gradientLayer removeFromSuperlayer];
     
     
     self.indexItems = [self.dataSource sectionIndexTitlesForMJNIndexView:self];
@@ -201,6 +249,11 @@
 // calculating all necessary sizes and values to draw index items
 - (void)getAllItemsSize
 {
+    
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     CGSize indexSize = CGSizeZero;
     
     // determining font sizes
@@ -237,6 +290,9 @@
         }
         if (currentItemSize.width > self.maxItemDeflection) {
             self.maxItemDeflection = currentItemSize.width;
+        }
+        if (currentItemSize.height > self.maxHeight) {
+            self.maxHeight = currentItemSize.height;
         }
     }
     
@@ -279,13 +335,22 @@
     }
     
     // checking if range of items to deflect is not too big
-    if (self.rangeOfDeflection > [self.indexItems count]/2 - 1) self.rangeOfDeflection = [self.indexItems count]/2 - 1;
+    if (self.indexItems.count == 1) {
+        // if there is only one item in index there is no need to animate index
+        self.actualRangeOfDeflection = 0;
+    } else if (self.rangeOfDeflection > ([self.indexItems count]/2 - 1)) { // if items range of deflection is bigger than half of items in index we should set it to exact half of items number
+        self.actualRangeOfDeflection = [self.indexItems count]/2;
+    } else self.actualRangeOfDeflection = self.rangeOfDeflection;
 }
 
 
 // checking if there are any items with lower case
 - (BOOL)checkForLowerCase
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     NSCharacterSet *lowerCaseSet = [NSCharacterSet lowercaseLetterCharacterSet];
     for (NSString *item in self.indexItems) {
         if ([item rangeOfCharacterFromSet:lowerCaseSet].location != NSNotFound) return YES;
@@ -297,6 +362,10 @@
 // checking ig there are any items with upper case
 - (BOOL)checkForUpperCase
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     NSCharacterSet *upperCaseSet = [NSCharacterSet uppercaseLetterCharacterSet];
     for (NSString *item in self.indexItems) {
         if ([item rangeOfCharacterFromSet:upperCaseSet].location != NSNotFound) return YES;
@@ -307,6 +376,10 @@
 
 - (void) initialiseAllAttributes
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     CGFloat verticalPos = self.firstItemOrigin.y;
     NSMutableArray *newItemsAttributes = [NSMutableArray new];
     
@@ -342,7 +415,7 @@
             NSCache *itemAttributes = [@{@"item":item,
                                                    @"origin":newValueForPoint,
                                                    @"position":newValueForPoint,
-                                                   @"font":self.font,
+                                                   @"font":(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL),
                                                    @"color":self.fontColor,
                                                    @"alpha":alpha,
                                                    @"zPosition":zPosition,
@@ -367,10 +440,14 @@
 // reseting positions of index items
 - (void) resetPosition
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     for (NSCache *itemAttributes in self.itemsAtrributes){
         CGPoint origin = [[itemAttributes objectForKey:@"origin"] CGPointValue];
         [itemAttributes setObject:[NSValue valueWithCGPoint:origin] forKey:@"position"];
-        [itemAttributes setObject:self.font forKey:@"font"];
+        [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
         [itemAttributes setObject:@(1.0) forKey:@"alpha"];
         [itemAttributes setObject:self.fontColor forKey:@"color"];
         [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
@@ -387,6 +464,10 @@
 #pragma mark calculating item position during the pan gesture
 - (void) positionForIndexItemsWhilePanLocation:(CGPoint)location
 {    
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     CGFloat verticalPos = self.firstItemOrigin.y;
   
     int section = 0;
@@ -402,16 +483,16 @@
         
         // we have to map amplitude of deflection
         
-        float mappedAmplitude = self.maxItemDeflection / self.itemsOffset / ((float)self.rangeOfDeflection);
+        float mappedAmplitude = self.maxItemDeflection / self.itemsOffset / ((float)self.actualRangeOfDeflection);
         
         // now we are checking if touch is within the range of items we would like to deflect
-        BOOL min = location.y > point.y - ((float)self.rangeOfDeflection * self.itemsOffset);
-        BOOL max = location.y < point.y + ((float)self.rangeOfDeflection * self.itemsOffset);
+        BOOL min = location.y > point.y - ((float)self.actualRangeOfDeflection * self.itemsOffset);
+        BOOL max = location.y < point.y + ((float)self.actualRangeOfDeflection * self.itemsOffset);
         
         if (min && max) {
             
             // these calculations are necessary to make our deflection not linear
-            float differenceMappedToAngle = 90.0 / (self.itemsOffset * (float)self.rangeOfDeflection);
+            float differenceMappedToAngle = 90.0 / (self.itemsOffset * (float)self.actualRangeOfDeflection);
             float angle = (fabs(point.y - location.y)* differenceMappedToAngle);
             float angleInRadians = angle * (M_PI/180);
             float arcusTan = fabs(atan(angleInRadians));
@@ -422,9 +503,9 @@
             point.x = MIN(point.x, origin.x);
             
             // we have to map difference to range in order to determine right zPosition
-            float differenceMappedToRange = self.rangeOfDeflection / (self.rangeOfDeflection * self.itemsOffset);
+            float differenceMappedToRange = self.actualRangeOfDeflection / (self.actualRangeOfDeflection * self.itemsOffset);
     
-            CGFloat zPosition = self.rangeOfDeflection - fabs(point.y - location.y) * differenceMappedToRange;
+            CGFloat zPosition = self.actualRangeOfDeflection - fabs(point.y - location.y) * differenceMappedToRange;
             
             [itemAttributes setObject:@(5.0 + zPosition) forKey:@"zPosition"];
             
@@ -437,7 +518,7 @@
             fontSize = self.font.pointSize + fontIncrease;
             
             // calculating a color darkening factor
-            float differenceMappedToColorChange = 1.0 / (self.rangeOfDeflection * self.itemsOffset);
+            float differenceMappedToColorChange = 1.0 / (self.actualRangeOfDeflection * self.itemsOffset);
             CGFloat colorChange = fabs(point.y - location.y) * differenceMappedToColorChange;
             
             if (self.darkening) {
@@ -449,7 +530,7 @@
                 alpha = colorChange;
             } else alpha = 1.0;
            
-            [itemAttributes setObject:[UIFont fontWithName:self.font.fontName size:fontSize] forKey:@"font"];
+            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, fontSize, NULL) forKey:@"font"];
             
             [itemAttributes setObject:fontColor forKey:@"color"];
             
@@ -464,7 +545,7 @@
             if (selectedInRange || firstItemInRange || lastItemInRange) {
                 alpha = 1.0;
                 
-                [itemAttributes setObject:[UIFont fontWithName:self.selectedItemFont.fontName size:fontSize] forKey:@"font"];
+                [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.selectedItemFont.fontName, fontSize, NULL) forKey:@"font"];
                 [itemAttributes setObject:self.selectedItemFontColor forKey:@"color"];
                 [itemAttributes setObject:@(10.0) forKey:@"zPosition"];
                 if (!self.getSelectedItemsAfterPanGestureIsFinished && [self.section integerValue] != section) {
@@ -484,7 +565,7 @@
             
             point.x = origin.x;
             alpha = 1.0;
-            [itemAttributes setObject:self.font forKey:@"font"];
+            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
             fontColor = self.fontColor;
             [itemAttributes setObject:self.fontColor forKey:@"color"];
             [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
@@ -509,6 +590,10 @@
 // calculating darker color to the given one
 - (UIColor *)darkerColor:(UIColor *)color by:(float)value
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     float h, s, b, a;
     if ([color getHue:&h saturation:&s brightness:&b alpha:&a])
         return [UIColor colorWithHue:h
@@ -522,10 +607,14 @@
 #pragma mark drawing CATextLayers with indexitems
 - (void) drawIndex
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     for (NSCache *itemAttributes in self.itemsAtrributes) {
         // getting attributes necessary to check if we need to animate
         
-        UIFont *currentFont = [itemAttributes objectForKey:@"font"];
+        CTFontRef currentFont = (__bridge CTFontRef)[itemAttributes objectForKey:@"font"];
         CATextLayer * singleItemTextLayer = [itemAttributes objectForKey:@"layer"];
         
         // checking if all CATexts exists
@@ -534,7 +623,7 @@
         }
         
         // checking if font size is different if it's different we have to animate CALayer
-        if (singleItemTextLayer.fontSize != currentFont.pointSize) {
+        if (singleItemTextLayer.fontSize != CTFontGetSize(currentFont)) {
             // we have to animate several CALayers at once
             [CATransaction begin];
             
@@ -546,12 +635,27 @@
             // getting other attributes and updading CALayer
             CGPoint point = [[itemAttributes objectForKey:@"position"] CGPointValue];
             NSString *currentItem = [itemAttributes objectForKey:@"item"];
-            CGSize textSize = [currentItem sizeWithFont:currentFont];
+            
+            CFStringRef stringRef = (__bridge CFStringRef)currentItem;
+            CFMutableAttributedStringRef attrStr = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+            CFAttributedStringReplaceString (attrStr, CFRangeMake(0, 0), stringRef);
+            CTTextAlignment alignment = kCTJustifiedTextAlignment;
+            CTParagraphStyleSetting _settings[] = { {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment} };
+            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(_settings, sizeof(_settings) / sizeof(_settings[0]));
+            CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTParagraphStyleAttributeName, paragraphStyle);
+            CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTFontAttributeName, currentFont);
+            CFRelease(paragraphStyle);
+            
+            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrStr);
+            CFRelease(attrStr);
+            
+            CGSize textSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, currentItem.length), NULL, CGSizeMake(self.maxWidth, self.maxHeight*2.0), NULL);
+            CFRelease(framesetter);
             UIColor *fontColor = [itemAttributes objectForKey:@"color"];
             
             singleItemTextLayer.zPosition = [[itemAttributes objectForKey:@"zPosition"] floatValue];
-            singleItemTextLayer.font = (__bridge CFTypeRef)(currentFont.fontName);
-            singleItemTextLayer.fontSize = currentFont.pointSize;
+            singleItemTextLayer.font = currentFont;
+            singleItemTextLayer.fontSize = CTFontGetSize(currentFont);
             singleItemTextLayer.opacity = [[itemAttributes objectForKey:@"alpha"] floatValue];
             singleItemTextLayer.string = currentItem;
             singleItemTextLayer.backgroundColor = [UIColor clearColor].CGColor;
@@ -575,6 +679,10 @@
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     int section = 0;
     
     // checking if item any item is touched
@@ -594,10 +702,18 @@
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     CGFloat currentY = [touch locationInView:self].y;
     CGFloat prevY = [touch previousLocationInView:self].y;
     
-    [self showCurtain];
+    
+    if (self.curtainColor) {
+        [self showCurtain];
+    }
+    
         
     // if pan is longer than three pixel we need to accelerate animation by setting self.animate to NO
     if (fabs(currentY - prevY) > 3.0) {
@@ -611,6 +727,10 @@
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // sending selected items to dataSource
     [self.dataSource sectionForSectionMJNIndexTitle:self.indexItems[[self.section integerValue]] atIndex:[self.section integerValue]];
 
@@ -627,19 +747,32 @@
     // if pan stopped we can deacellerate animation, reset position and hide curtain
     self.animate = YES;
     [self resetPosition];
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
     
 }
 
 - (void)cancelTrackingWithEvent:(UIEvent *)event
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // if touch was canceled we reset everything
     self.animate = YES;
     [self resetPosition];
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
     }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // UIView will be "transparent" for touch events if we return NO
     // we are going to return YES only if items or area right to them is being touched
     if ((point.x > self.bounds.size.width - (self.indexSize.width + self.rightMargin + 10.0)) &&
@@ -653,6 +786,10 @@
 
 - (void)addCurtain
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // if we want a curtain to fade we have to use CAGradientLayer
     if (self.curtainFade != 0.0) {
         if (self.curtainFade > 1) self.curtainFade = 1;
@@ -688,12 +825,18 @@
    
     // curtain is added now we have to hide it first
     self.curtain = YES;
-    [self hideCurtain];
+    if (self.curtainColor) {
+        [self hideCurtain];
+    }
 }
 
 // hiding the curtain
 - (void)hideCurtain
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // first we have to check if the curtain is shown and a color for it is set
     if (self.curtain && self.curtainColor) {
         CGRect curtainBoundsRect;
@@ -763,8 +906,12 @@
 // showing the curtain
 - (void)showCurtain
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // first we have to check if the curtain is shown and a color for it is set
-    if (!self.curtain && self.curtainColor && self.curtainMoves) {
+    if (!self.curtain && self.curtainColor && self.curtainMoves && self.actualRangeOfDeflection > 0) {
         CGFloat curtainVerticalCenter;
         CGRect curtainBoundsRect;
         
@@ -806,6 +953,10 @@
 - (void)drawLabel:(NSString *)label withFont:(UIFont *)font forSize:(CGSize)size
           atPoint:(CGPoint)point withAlignment:(NSTextAlignment)alignment lineBreakMode:(NSLineBreakMode)lineBreak color:(UIColor *)color
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     // obtain current context
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -839,6 +990,10 @@
 // drawing rectangles - for test purposes only
 - (void)drawTestRectangleAtPoint:(CGPoint)p withSize:(CGSize)size red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     CGContextSetRGBFillColor(context, red, green, blue, alpha);
@@ -852,6 +1007,10 @@
 // our drawRect - for test purposee only
 - (void)drawRect:(CGRect)rect
 {
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
+    }
+    
     if (self.dot) {
         [self drawTestRectangleAtPoint:CGPointMake(self.bounds.size.width / 2.0 - 100.0, self.bounds.size.height / 2.0 - 100.0)
                               withSize:CGSizeMake(200.0, 200.0)
