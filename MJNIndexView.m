@@ -738,26 +738,27 @@
         NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
     }
     
-    // sending selected items to dataSource
-    [self.dataSource sectionForSectionMJNIndexTitle:self.indexItems[[self.section integerValue]] atIndex:[self.section integerValue]];
-
-    
-    // some easter eggs ;)
-    if ([self.section integerValue] == 3 * self.times) {
-        self.times ++;
-        if (self.times == 5) {
-            self.dot = YES;
-            [self setNeedsDisplay];
+    if (self.indexItems && [self.indexItems count] > 0) {
+        // sending selected items to dataSource
+        [self.dataSource sectionForSectionMJNIndexTitle:self.indexItems[[self.section integerValue]] atIndex:[self.section integerValue]];
+        
+        
+        // some easter eggs ;)
+        if ([self.section integerValue] == 3 * self.times) {
+            self.times ++;
+            if (self.times == 5) {
+                self.dot = YES;
+                [self setNeedsDisplay];
+            }
+        } else self.times = 0;
+        
+        // if pan stopped we can deacellerate animation, reset position and hide curtain
+        self.animate = YES;
+        [self resetPosition];
+        if (self.curtainColor) {
+            [self hideCurtain];
         }
-    } else self.times = 0;
-    
-    // if pan stopped we can deacellerate animation, reset position and hide curtain
-    self.animate = YES;
-    [self resetPosition];
-    if (self.curtainColor) {
-        [self hideCurtain];
     }
-    
 }
 
 - (void)cancelTrackingWithEvent:(UIEvent *)event
