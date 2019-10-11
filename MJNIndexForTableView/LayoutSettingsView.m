@@ -318,7 +318,7 @@
 {
     if ([sender.text floatValue] < 0) sender.text = @"0";
 
-    self.rangeOfDeflection = [sender.text integerValue];
+    self.rangeOfDeflection = (int)[sender.text integerValue];
     self.rangeDeflectionStepper.value = [sender.text integerValue];
     [self updateLayout];
 }

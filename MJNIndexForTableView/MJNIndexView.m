@@ -346,7 +346,7 @@
         // if there is only one item in index there is no need to animate index
         self.actualRangeOfDeflection = 0;
     } else if (self.rangeOfDeflection > ([self.indexItems count]/2 - 1)) { // if items range of deflection is bigger than half of items in index we should set it to exact half of items number
-        self.actualRangeOfDeflection = [self.indexItems count]/2;
+        self.actualRangeOfDeflection = (int)[self.indexItems count]/2;
     } else self.actualRangeOfDeflection = self.rangeOfDeflection;
 }
 
@@ -505,7 +505,7 @@
             float arcusTan = fabs(atan(angleInRadians));
             
             // now we have to calculate the deflected position of an item
-            point.x = origin.x - (self.maxItemDeflection) + (fabsf(point.y - location.y) * mappedAmplitude) * (arcusTan);
+            point.x = origin.x - (self.maxItemDeflection) + (fabs(point.y - location.y) * mappedAmplitude) * (arcusTan);
             
             point.x = MIN(point.x, origin.x);
             
@@ -601,7 +601,7 @@
         NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
     }
     
-    float h, s, b, a;
+    CGFloat h, s, b, a;
     if ([color getHue:&h saturation:&s brightness:&b alpha:&a])
         return [UIColor colorWithHue:h
                           saturation:s
@@ -825,7 +825,7 @@
         
         // if we do not need the fading curtain we can use simple CALayer
         if (!self.gradientLayer) {
-            self.gradientLayer = [CALayer layer];
+            self.gradientLayer = (CAGradientLayer *)[CALayer layer];
             [self.layer insertSublayer:self.gradientLayer atIndex:0];
         }
         self.gradientLayer.backgroundColor = self.curtainColor.CGColor;

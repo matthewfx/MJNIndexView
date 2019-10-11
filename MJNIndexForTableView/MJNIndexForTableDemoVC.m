@@ -130,6 +130,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     // adding swipe right gesture to open the settings
     UISwipeGestureRecognizer* gestureR;
     gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
@@ -145,8 +146,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
     //[self secondTableExample];
         
     // initialise tableView
-  
-	self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.bounds.size.width, self.view.bounds.size.height - 60.0)];
     [self.tableView registerClass:[UITableViewCell class]forCellReuseIdentifier:@"cell"];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"header"];
     self.tableView.dataSource = self;
@@ -171,7 +171,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
     [self.view addSubview:settingsButton];
     
     // adding view for settings
-    self.settingsView = [[UIView alloc] initWithFrame:CGRectMake(-240.0, 0.0, 240.0, self.view.bounds.size.height)];
+    self.settingsView = [[UIView alloc] initWithFrame:CGRectMake(-240.0, 40.0, 240.0, self.view.bounds.size.height - 60.0)];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0.0,0.0,240.0,self.settingsView.bounds.size.height);
     UIColor *firstColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
@@ -185,7 +185,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
 
     // adding scrollview to settings view
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 240.0, self.view.bounds.size.height)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 240.0, self.view.bounds.size.height - 20.0)];
     self.scrollView.scrollEnabled = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
@@ -226,7 +226,6 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
     [self.settingsView addSubview:nextButton];
     
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -682,7 +681,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
             self.alphaString = [self.alphaString stringByAppendingString:firstLetterInName];
         }
     }
-    return [existingLetters count];
+    return (int)[existingLetters count];
 }
 
 
@@ -784,7 +783,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
 
 - (void)layoutSettingForIndexItems:(NSDictionary *)settings
 {    
-    self.rangeOfDeflection = [settings[@"range"] integerValue];
+    self.rangeOfDeflection = (int)[settings[@"range"] integerValue];
     self.maxItemDeflection = [settings[@"maxDef"] floatValue];
     self.itemsAligment = [settings[@"aligment"] integerValue];
     self.rightMargin = [settings[@"rightMargin"] floatValue];
