@@ -275,7 +275,7 @@
     
     // calculating size of all index items
     for (NSString *item in self.indexItems) {
-        CGSize currentItemSize = [item sizeWithFont:self.font];
+        CGSize currentItemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
         
         // if index items are smaller than 5.0 points display alert and do not display index at all
         if (currentItemSize.height < 5.0) {
@@ -291,7 +291,7 @@
     
     // calculating if deflectionRange is not too small based on the width of the longest index item using the font for selected item
     for (NSString *item in self.indexItems) {
-        CGSize currentItemSize = [item sizeWithFont:self.selectedItemFont];
+        CGSize currentItemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.selectedItemFont}];
         if (currentItemSize.width > self.maxWidth) {
             self.maxWidth = currentItemSize.width;
         }
@@ -399,11 +399,11 @@
         
         if (self.itemsAligment == NSTextAlignmentCenter){
             
-            CGSize itemSize = [item sizeWithFont:self.font];
+            CGSize itemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
             point.x = self.firstItemOrigin.x - itemSize.width/2;
         } else if (self.itemsAligment == NSTextAlignmentRight) {
             
-            CGSize itemSize = [item sizeWithFont:self.font];
+            CGSize itemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
             point.x = self.firstItemOrigin.x - itemSize.width;
         } else point.x = self.firstItemOrigin.x;
         
@@ -646,7 +646,7 @@
             CFStringRef stringRef = (__bridge CFStringRef)currentItem;
             CFMutableAttributedStringRef attrStr = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
             CFAttributedStringReplaceString (attrStr, CFRangeMake(0, 0), stringRef);
-            CTTextAlignment alignment = kCTJustifiedTextAlignment;
+            CTTextAlignment alignment = kCTTextAlignmentJustified;
             CTParagraphStyleSetting _settings[] = { {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment} };
             CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(_settings, sizeof(_settings) / sizeof(_settings[0]));
             CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTParagraphStyleAttributeName, paragraphStyle);

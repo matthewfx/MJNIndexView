@@ -99,7 +99,7 @@
     
     UISegmentedControl *aligmentSelector = [[UISegmentedControl alloc]initWithItems:aligmentNames];
     UIFont *font = [UIFont boldSystemFontOfSize:10.0];
-    NSDictionary *attributes = @{UITextAttributeFont:font};
+    NSDictionary *attributes = @{NSFontAttributeName:font};
     [aligmentSelector setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
     aligmentSelector.frame = CGRectMake(20.0, 54.0, 200, 40);

@@ -83,7 +83,7 @@
     NSArray *fontNamesForSelectedItems = @[@"HelveticaNeue-Bold",@"TimesNewRomanPS-BoldMT",@"GillSans-Bold"];
     UISegmentedControl *fontNameSelector = [[UISegmentedControl alloc]initWithItems:fontNames];
     UIFont *font = [UIFont boldSystemFontOfSize:10.0];
-    NSDictionary *attributes = @{UITextAttributeFont:font};
+    NSDictionary *attributes = @{NSFontAttributeName:font};
     [fontNameSelector setTitleTextAttributes:attributes
                                     forState:UIControlStateNormal];
     fontNameSelector.frame = CGRectMake(20.0, 54.0, 200, 40);
