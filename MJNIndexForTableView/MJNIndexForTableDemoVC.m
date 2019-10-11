@@ -131,13 +131,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    // adding swipe right gesture to open the settings
-    UISwipeGestureRecognizer* gestureR;
-    gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
-    gestureR.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:gestureR];
 
-    
     // setting all examples for the first example
     self.allExamples = @[@(1), @(0), @(0), @(0), @(0)];
 
@@ -348,7 +342,7 @@ LayoutSettingsViewDelegate, ExampleSettingsViewDelegate>
     self.indexView.curtainFade = 0.0;
     self.indexView.curtainStays = YES;
     self.indexView.curtainMoves = YES;
-    self.indexView.curtainMargins = YES;
+    self.indexView.curtainMargins = NO;
     self.indexView.ergonomicHeight = NO;
     self.indexView.upperMargin = 30.0;
     self.indexView.lowerMargin = 124.0;

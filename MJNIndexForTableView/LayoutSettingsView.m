@@ -114,21 +114,21 @@
     // darkening label
     UILabel *darkeningLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 107.0, 90.0, 21.0)];
     darkeningLabel.backgroundColor = [UIColor clearColor];
-    darkeningLabel.font = [UIFont fontWithName:darkeningLabel.font.fontName size:15.0];
+    darkeningLabel.font = [UIFont systemFontOfSize: 15.0];
     darkeningLabel.text = @"darkening";
     [self addSubview:darkeningLabel];
     
     // fading label
     UILabel *fadingLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 142.0, 90.0, 21.0)];
     fadingLabel.backgroundColor = [UIColor clearColor];
-    fadingLabel.font = [UIFont fontWithName:darkeningLabel.font.fontName size:15.0];
+    fadingLabel.font = [UIFont systemFontOfSize: 15.0];
     fadingLabel.text = @"fading";
     [self addSubview:fadingLabel];
     
     // ergo label
     UILabel *ergoLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 177.0, 100.0, 21.0)];
     ergoLabel.backgroundColor = [UIColor clearColor];
-    ergoLabel.font = [UIFont fontWithName:darkeningLabel.font.fontName size:15.0];
+    ergoLabel.font = [UIFont systemFontOfSize: 15.0];
     ergoLabel.text = @"ergo height";
     [self addSubview:ergoLabel];
     
@@ -154,7 +154,7 @@
     
     // Range label
     UILabel *rangeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 212.0, 163.0, 21.0)];
-    rangeLabel.font = [UIFont fontWithName:rangeLabel.font.fontName size:15.0];
+    rangeLabel.font = [UIFont systemFontOfSize: 15.0];
     rangeLabel.text = @"Range of deflection";
     rangeLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:rangeLabel];
@@ -179,7 +179,7 @@
     
     // Max deflection label
     UILabel *maxDefLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 280.0, 140.0, 16.0)];
-    maxDefLabel.font = [UIFont fontWithName:rangeLabel.font.fontName size:12.0];
+    maxDefLabel.font = [UIFont systemFontOfSize: 12.0];
     maxDefLabel.text = @"Max. items deflection";
     maxDefLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:maxDefLabel];
@@ -205,7 +205,7 @@
     
     // rightMargin label
     UILabel *rightMarginLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 320.0, 140.0, 16.0)];
-    rightMarginLabel.font = [UIFont fontWithName:rangeLabel.font.fontName size:12.0];
+    rightMarginLabel.font = [UIFont systemFontOfSize: 12.0];
     rightMarginLabel.text = @"Right margin";
     rightMarginLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:rightMarginLabel];
@@ -231,7 +231,7 @@
     
     // upperMargin label
     UILabel *upperMarginLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 360.0, 140.0, 16.0)];
-    upperMarginLabel.font = [UIFont fontWithName:rangeLabel.font.fontName size:12.0];
+    upperMarginLabel.font = [UIFont systemFontOfSize: 12.0];
     upperMarginLabel.text = @"Upper margin";
     upperMarginLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:upperMarginLabel];
@@ -257,7 +257,7 @@
     
     // lowerMargin label
     UILabel *lowerMarginLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 400.0, 140.0, 16.0)];
-    lowerMarginLabel.font = [UIFont fontWithName:rangeLabel.font.fontName size:12.0];
+    lowerMarginLabel.font = [UIFont systemFontOfSize: 12.0];
     lowerMarginLabel.text = @"Lower margin";
     lowerMarginLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:lowerMarginLabel];

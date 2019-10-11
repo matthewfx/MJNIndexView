@@ -70,7 +70,7 @@
 {
     // title label
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 20.0, 210.0, 21.0)];
-    title.font = [UIFont fontWithName:title.font.fontName size:15.0];
+    title.font = [UIFont systemFontOfSize: 15.0];
     title.backgroundColor = [UIColor clearColor];
     if (self.selected) title.text = @"Selected item font name";
     else title.text = @"Items font name";
@@ -148,7 +148,7 @@
     
     // R label
     UILabel *redLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 280.0, 140.0, 16.0)];
-    redLabel.font = [UIFont fontWithName:redLabel.font.fontName size:12.0];
+    redLabel.font = [UIFont systemFontOfSize: 12.0];
     redLabel.text = @"Red";
     redLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:redLabel];
@@ -172,7 +172,7 @@
     
     // G label
     UILabel *greenLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 320.0, 140.0, 16.0)];
-    greenLabel.font = [UIFont fontWithName:greenLabel.font.fontName size:12.0];
+    greenLabel.font = [UIFont systemFontOfSize: 12.0];
     greenLabel.text = @"Green";
     greenLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:greenLabel];
@@ -197,7 +197,7 @@
     
     // B label
     UILabel *blueLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 360.0, 140.0, 16.0)];
-    blueLabel.font = [UIFont fontWithName:blueLabel.font.fontName size:12.0];
+    blueLabel.font = [UIFont systemFontOfSize: 12.0];
     blueLabel.text = @"Blue";
     blueLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:blueLabel];
@@ -222,7 +222,7 @@
     
     // A label
     UILabel *alphaLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 400.0, 140.0, 16.0)];
-    alphaLabel.font = [UIFont fontWithName:alphaLabel.font.fontName size:12.0];
+    alphaLabel.font = [UIFont systemFontOfSize: 12.0];
     alphaLabel.text = @"Alpha";
     alphaLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:alphaLabel];

@@ -92,7 +92,7 @@
     
     // curtain on/off label
     UILabel *onOffLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 53.0, 80.0, 21.0)];
-    onOffLabel.font = [UIFont fontWithName:onOffLabel.font.fontName size:15.0];
+    onOffLabel.font = [UIFont systemFontOfSize:15];
     onOffLabel.backgroundColor = [UIColor clearColor];
     onOffLabel.text = @"ON/OFF";
     [self addSubview:onOffLabel];
@@ -107,7 +107,7 @@
     
     // curtainStays label
     UILabel *curtainStaysLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 88.0, 100.0, 21.0)];
-    curtainStaysLabel.font = [UIFont fontWithName:curtainStaysLabel.font.fontName size:15.0];
+    curtainStaysLabel.font = [UIFont systemFontOfSize:15];
     curtainStaysLabel.backgroundColor = [UIColor clearColor];
     curtainStaysLabel.text = @"Curtain stays";
     [self addSubview:curtainStaysLabel];
@@ -120,7 +120,7 @@
     
     // curtainMargins label
     UILabel *curtainMarginsLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 123.0, 110.0, 21.0)];
-    curtainMarginsLabel.font = [UIFont fontWithName:curtainMarginsLabel.font.fontName size:15.0];
+    curtainMarginsLabel.font = [UIFont systemFontOfSize:15.0];
     curtainMarginsLabel.backgroundColor = [UIColor clearColor];
     curtainMarginsLabel.text = @"Curtain margins";
     [self addSubview:curtainMarginsLabel];
@@ -133,7 +133,7 @@
     
     // curtain fade label
     UILabel *curtainFadeTitle = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 158.0, 100.0, 21.0)];
-    curtainFadeTitle.font = [UIFont fontWithName:curtainFadeTitle.font.fontName size:15.0];
+    curtainFadeTitle.font = [UIFont systemFontOfSize: 15.0];
     curtainFadeTitle.backgroundColor = [UIColor clearColor];
     curtainFadeTitle.text = @"Curtain fade";
     [self addSubview:curtainFadeTitle];
@@ -172,7 +172,7 @@
     
     // R label
     UILabel *redLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 280.0, 140.0, 16.0)];
-    redLabel.font = [UIFont fontWithName:redLabel.font.fontName size:12.0];
+    redLabel.font = [UIFont systemFontOfSize: 12.0];
     redLabel.text = @"Red";
     redLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:redLabel];
@@ -196,7 +196,7 @@
     
     // G label
     UILabel *greenLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 320.0, 140.0, 16.0)];
-    greenLabel.font = [UIFont fontWithName:greenLabel.font.fontName size:12.0];
+    greenLabel.font = [UIFont systemFontOfSize: 12.0];
     greenLabel.text = @"Green";
     greenLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:greenLabel];
@@ -221,7 +221,7 @@
     
     // B label
     UILabel *blueLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 360.0, 140.0, 16.0)];
-    blueLabel.font = [UIFont fontWithName:blueLabel.font.fontName size:12.0];
+    blueLabel.font = [UIFont systemFontOfSize: 12.0];
     blueLabel.text = @"Blue";
     blueLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:blueLabel];
@@ -246,7 +246,7 @@
     
     // A label
     UILabel *alphaLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 400.0, 140.0, 16.0)];
-    alphaLabel.font = [UIFont fontWithName:alphaLabel.font.fontName size:12.0];
+    alphaLabel.font = [UIFont systemFontOfSize: 12.0];
     alphaLabel.text = @"Alpha";
     alphaLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:alphaLabel];
