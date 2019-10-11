@@ -24,17 +24,11 @@
 		409C7C3A177C560100BD4EEE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 409C7C38177C560100BD4EEE /* InfoPlist.strings */; };
 		409C7C3C177C560100BD4EEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 409C7C3B177C560100BD4EEE /* main.m */; };
 		409C7C40177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 409C7C3F177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.m */; };
-		409C7C42177C560100BD4EEE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 409C7C41177C560100BD4EEE /* Default.png */; };
-		409C7C44177C560100BD4EEE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 409C7C43177C560100BD4EEE /* Default@2x.png */; };
-		409C7C46177C560100BD4EEE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 409C7C45177C560100BD4EEE /* Default-568h@2x.png */; };
-		409C7C49177C560100BD4EEE /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 409C7C47177C560100BD4EEE /* MainStoryboard_iPhone.storyboard */; };
 		409C7C57177C593000BD4EEE /* MJNIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 409C7C56177C593000BD4EEE /* MJNIndexView.m */; };
 		409C7C59177C5EF200BD4EEE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409C7C58177C5EF200BD4EEE /* QuartzCore.framework */; };
+		40CD6EF723502EBF0093362B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40CD6EF623502EBF0093362B /* Images.xcassets */; };
+		40CD6EFD235031C00093362B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40CD6EFC235031C00093362B /* Launch Screen.storyboard */; };
 		40E1F54217900E7E002DD49F /* MJNIndexForTableDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E1F54117900E7E002DD49F /* MJNIndexForTableDemoVC.m */; };
-		40FC542C179E91C200EF5B16 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FC5428179E91C200EF5B16 /* icon114.png */; };
-		40FC542D179E91C200EF5B16 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FC5429179E91C200EF5B16 /* icon144.png */; };
-		40FC542E179E91C200EF5B16 /* image57.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FC542A179E91C200EF5B16 /* image57.png */; };
-		40FC542F179E91C200EF5B16 /* image72.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FC542B179E91C200EF5B16 /* image72.png */; };
 		40FC5438179E91E600EF5B16 /* CurtainSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC5431179E91E600EF5B16 /* CurtainSettings.m */; };
 		40FC5439179E91E600EF5B16 /* ExamplesSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC5433179E91E600EF5B16 /* ExamplesSettings.m */; };
 		40FC543A179E91E600EF5B16 /* FontSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC5435179E91E600EF5B16 /* FontSettingsView.m */; };
@@ -63,19 +57,13 @@
 		409C7C3D177C560100BD4EEE /* MJNIndexForTableView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MJNIndexForTableView-Prefix.pch"; sourceTree = "<group>"; };
 		409C7C3E177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJNIndexForTableViewAppDelegate.h; sourceTree = "<group>"; };
 		409C7C3F177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJNIndexForTableViewAppDelegate.m; sourceTree = "<group>"; };
-		409C7C41177C560100BD4EEE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		409C7C43177C560100BD4EEE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		409C7C45177C560100BD4EEE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		409C7C48177C560100BD4EEE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		409C7C55177C593000BD4EEE /* MJNIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJNIndexView.h; sourceTree = "<group>"; };
 		409C7C56177C593000BD4EEE /* MJNIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJNIndexView.m; sourceTree = "<group>"; };
 		409C7C58177C5EF200BD4EEE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		40CD6EF623502EBF0093362B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		40CD6EFC235031C00093362B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		40E1F54017900E7E002DD49F /* MJNIndexForTableDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJNIndexForTableDemoVC.h; sourceTree = "<group>"; };
 		40E1F54117900E7E002DD49F /* MJNIndexForTableDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJNIndexForTableDemoVC.m; sourceTree = "<group>"; };
-		40FC5428179E91C200EF5B16 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
-		40FC5429179E91C200EF5B16 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
-		40FC542A179E91C200EF5B16 /* image57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image57.png; sourceTree = "<group>"; };
-		40FC542B179E91C200EF5B16 /* image72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image72.png; sourceTree = "<group>"; };
 		40FC5430179E91E600EF5B16 /* CurtainSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainSettings.h; sourceTree = "<group>"; };
 		40FC5431179E91E600EF5B16 /* CurtainSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainSettings.m; sourceTree = "<group>"; };
 		40FC5432179E91E600EF5B16 /* ExamplesSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamplesSettings.h; sourceTree = "<group>"; };
@@ -105,6 +93,7 @@
 		409C7C23177C560100BD4EEE = {
 			isa = PBXGroup;
 			children = (
+				40CD6EFC235031C00093362B /* Launch Screen.storyboard */,
 				409C7C35177C560100BD4EEE /* MJNIndexForTableView */,
 				409C7C2E177C560100BD4EEE /* Frameworks */,
 				409C7C2D177C560100BD4EEE /* Products */,
@@ -137,11 +126,11 @@
 				409C7C3E177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.h */,
 				409C7C3F177C560100BD4EEE /* MJNIndexForTableViewAppDelegate.m */,
 				40FC5427179E871400EF5B16 /* settings */,
-				409C7C47177C560100BD4EEE /* MainStoryboard_iPhone.storyboard */,
 				409C7C55177C593000BD4EEE /* MJNIndexView.h */,
 				409C7C56177C593000BD4EEE /* MJNIndexView.m */,
 				40E1F54017900E7E002DD49F /* MJNIndexForTableDemoVC.h */,
 				40E1F54117900E7E002DD49F /* MJNIndexForTableDemoVC.m */,
+				40CD6EF623502EBF0093362B /* Images.xcassets */,
 				409C7C36177C560100BD4EEE /* Supporting Files */,
 			);
 			path = MJNIndexForTableView;
@@ -152,10 +141,6 @@
 			children = (
 				409BDAB5178594B8002E6814 /* crayons.txt */,
 				402F9A8C1799AAE7001CEB34 /* crayons2.txt */,
-				40FC5428179E91C200EF5B16 /* icon114.png */,
-				40FC5429179E91C200EF5B16 /* icon144.png */,
-				40FC542A179E91C200EF5B16 /* image57.png */,
-				40FC542B179E91C200EF5B16 /* image72.png */,
 				402F9A8E1799B476001CEB34 /* closeButton.png */,
 				402F9A8F1799B476001CEB34 /* closeButton@2x.png */,
 				402F9A901799B476001CEB34 /* nextButton.png */,
@@ -168,9 +153,6 @@
 				409C7C38177C560100BD4EEE /* InfoPlist.strings */,
 				409C7C3B177C560100BD4EEE /* main.m */,
 				409C7C3D177C560100BD4EEE /* MJNIndexForTableView-Prefix.pch */,
-				409C7C41177C560100BD4EEE /* Default.png */,
-				409C7C43177C560100BD4EEE /* Default@2x.png */,
-				409C7C45177C560100BD4EEE /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -217,15 +199,22 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MJNIndexForTableView;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Mateusz Nuckowski";
+				TargetAttributes = {
+					409C7C2B177C560100BD4EEE = {
+						DevelopmentTeam = HH94953BX4;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 409C7C27177C560100BD4EEE /* Build configuration list for PBXProject "MJNIndexForTableView" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 409C7C23177C560100BD4EEE;
 			productRefGroup = 409C7C2D177C560100BD4EEE /* Products */;
@@ -243,10 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				409C7C3A177C560100BD4EEE /* InfoPlist.strings in Resources */,
-				409C7C42177C560100BD4EEE /* Default.png in Resources */,
-				409C7C44177C560100BD4EEE /* Default@2x.png in Resources */,
-				409C7C46177C560100BD4EEE /* Default-568h@2x.png in Resources */,
-				409C7C49177C560100BD4EEE /* MainStoryboard_iPhone.storyboard in Resources */,
+				40CD6EF723502EBF0093362B /* Images.xcassets in Resources */,
+				40CD6EFD235031C00093362B /* Launch Screen.storyboard in Resources */,
 				409BDAB6178594B8002E6814 /* crayons.txt in Resources */,
 				402F9A8D1799AAE7001CEB34 /* crayons2.txt in Resources */,
 				402F9A961799B476001CEB34 /* closeButton.png in Resources */,
@@ -257,10 +244,6 @@
 				402F9A9B1799B476001CEB34 /* prevButton@2x.png in Resources */,
 				402F9A9C1799B476001CEB34 /* settingsButton.png in Resources */,
 				402F9A9D1799B476001CEB34 /* settingsButton@2x.png in Resources */,
-				40FC542C179E91C200EF5B16 /* icon114.png in Resources */,
-				40FC542D179E91C200EF5B16 /* icon144.png in Resources */,
-				40FC542E179E91C200EF5B16 /* image57.png in Resources */,
-				40FC542F179E91C200EF5B16 /* image72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,14 +276,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		409C7C47177C560100BD4EEE /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				409C7C48177C560100BD4EEE /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -311,26 +286,44 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mateusz Nuckowski (3XLYJ8RDN7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mateusz Nuckowski (3XLYJ8RDN7)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "30EB8802-E58F-423F-81EE-97D4DC878744";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "30EB8802-E58F-423F-81EE-97D4DC878744";
@@ -346,19 +339,36 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mateusz Nuckowski (3XLYJ8RDN7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mateusz Nuckowski (3XLYJ8RDN7)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "30EB8802-E58F-423F-81EE-97D4DC878744";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "30EB8802-E58F-423F-81EE-97D4DC878744";
@@ -371,11 +381,17 @@
 		409C7C53177C560100BD4EEE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HH94953BX4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MJNIndexForTableView/MJNIndexForTableView-Prefix.pch";
 				INFOPLIST_FILE = "MJNIndexForTableView/MJNIndexForTableView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				PRODUCT_BUNDLE_IDENTIFIER = co.quantumkiwi.MJNINdex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -383,11 +399,17 @@
 		409C7C54177C560100BD4EEE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HH94953BX4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MJNIndexForTableView/MJNIndexForTableView-Prefix.pch";
 				INFOPLIST_FILE = "MJNIndexForTableView/MJNIndexForTableView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				PRODUCT_BUNDLE_IDENTIFIER = co.quantumkiwi.MJNINdex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

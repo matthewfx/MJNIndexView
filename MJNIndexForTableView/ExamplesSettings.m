@@ -61,7 +61,7 @@
     
     // ex1 label
     UILabel *example1Label = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 53.0, 80.0, 21.0)];
-    example1Label.font = [UIFont fontWithName:example1Label.font.fontName size:15.0];
+    example1Label.font = [UIFont systemFontOfSize: 15.0];
     example1Label.backgroundColor = [UIColor clearColor];
     example1Label.text = @"Example 1";
     [self addSubview:example1Label];
@@ -75,7 +75,7 @@
     
     // ex2 label
     UILabel *example2Label = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 88.0, 100.0, 21.0)];
-    example2Label.font = [UIFont fontWithName:example2Label.font.fontName size:15.0];
+    example2Label.font = [UIFont systemFontOfSize: 15.0];
     example2Label.backgroundColor = [UIColor clearColor];
     example2Label.text = @"Example 2";
     [self addSubview:example2Label];
@@ -89,7 +89,7 @@
     
     // ex3 label
     UILabel *example3Label = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 123.0, 110.0, 21.0)];
-    example3Label.font = [UIFont fontWithName:example3Label.font.fontName size:15.0];
+    example3Label.font = [UIFont systemFontOfSize: 15.0];
     example3Label.backgroundColor = [UIColor clearColor];
     example3Label.text = @"Example 3";
     [self addSubview:example3Label];
@@ -103,7 +103,7 @@
     
     // ex4 label
     UILabel *example4Label = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 158.0, 110.0, 21.0)];
-    example4Label.font = [UIFont fontWithName:example4Label.font.fontName size:15.0];
+    example4Label.font = [UIFont systemFontOfSize: 15.0];
     example4Label.backgroundColor = [UIColor clearColor];
     example4Label.text = @"Example 4";
     [self addSubview:example4Label];
@@ -117,7 +117,7 @@
     
     // ex5 label
     UILabel *example5Label = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 193.0, 110.0, 21.0)];
-    example5Label.font = [UIFont fontWithName:example5Label.font.fontName size:15.0];
+    example5Label.font = [UIFont systemFontOfSize: 15.0];
     example5Label.backgroundColor = [UIColor clearColor];
     example5Label.text = @"Example 5";
     [self addSubview:example5Label];
@@ -131,7 +131,7 @@
     
     // getSelected title label
     UILabel *getSelTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20.0, 240.0, 100.0, 152.0)];
-    getSelTitleLabel.font = [UIFont fontWithName:getSelTitleLabel.font.fontName size:15.0];
+    getSelTitleLabel.font = [UIFont systemFontOfSize:15];
     getSelTitleLabel.numberOfLines = 7;
     getSelTitleLabel.backgroundColor = [UIColor clearColor];
     getSelTitleLabel.text = @"Getting the selected index item after the panning is finished";
@@ -183,20 +183,4 @@
 
 }
 
-
-// method for swipe to close
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    CGPoint tappedPt = [[touches anyObject] locationInView: self];
-    self.prevX = tappedPt.x;
-}
-
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    CGPoint tappedPt = [[touches anyObject] locationInView: self];
-    CGFloat currentX = tappedPt.x;
-    if (self.prevX - currentX > 20.0) [self.delegate close];
-}
 @end

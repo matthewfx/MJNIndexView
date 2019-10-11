@@ -7,12 +7,16 @@
 //
 
 #import "MJNIndexForTableViewAppDelegate.h"
+#import "MJNIndexForTableDemoVC.h"
 
 @implementation MJNIndexForTableViewAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    MJNIndexForTableDemoVC *viewController = [[MJNIndexForTableDemoVC alloc] init];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = viewController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
