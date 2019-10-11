@@ -275,7 +275,7 @@
     
     // calculating size of all index items
     for (NSString *item in self.indexItems) {
-        CGSize currentItemSize = [item sizeWithFont:self.font];
+        CGSize currentItemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
         
         // if index items are smaller than 5.0 points display alert and do not display index at all
         if (currentItemSize.height < 5.0) {
@@ -291,7 +291,7 @@
     
     // calculating if deflectionRange is not too small based on the width of the longest index item using the font for selected item
     for (NSString *item in self.indexItems) {
-        CGSize currentItemSize = [item sizeWithFont:self.selectedItemFont];
+        CGSize currentItemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.selectedItemFont}];
         if (currentItemSize.width > self.maxWidth) {
             self.maxWidth = currentItemSize.width;
         }
@@ -346,7 +346,7 @@
         // if there is only one item in index there is no need to animate index
         self.actualRangeOfDeflection = 0;
     } else if (self.rangeOfDeflection > ([self.indexItems count]/2 - 1)) { // if items range of deflection is bigger than half of items in index we should set it to exact half of items number
-        self.actualRangeOfDeflection = [self.indexItems count]/2;
+        self.actualRangeOfDeflection = (int)[self.indexItems count]/2;
     } else self.actualRangeOfDeflection = self.rangeOfDeflection;
 }
 
@@ -399,11 +399,11 @@
         
         if (self.itemsAligment == NSTextAlignmentCenter){
             
-            CGSize itemSize = [item sizeWithFont:self.font];
+            CGSize itemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
             point.x = self.firstItemOrigin.x - itemSize.width/2;
         } else if (self.itemsAligment == NSTextAlignmentRight) {
             
-            CGSize itemSize = [item sizeWithFont:self.font];
+            CGSize itemSize = [item sizeWithAttributes: @{NSFontAttributeName : self.font}];
             point.x = self.firstItemOrigin.x - itemSize.width;
         } else point.x = self.firstItemOrigin.x;
         
@@ -505,7 +505,7 @@
             float arcusTan = fabs(atan(angleInRadians));
             
             // now we have to calculate the deflected position of an item
-            point.x = origin.x - (self.maxItemDeflection) + (fabsf(point.y - location.y) * mappedAmplitude) * (arcusTan);
+            point.x = origin.x - (self.maxItemDeflection) + (fabs(point.y - location.y) * mappedAmplitude) * (arcusTan);
             
             point.x = MIN(point.x, origin.x);
             
@@ -601,7 +601,7 @@
         NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
     }
     
-    float h, s, b, a;
+    CGFloat h, s, b, a;
     if ([color getHue:&h saturation:&s brightness:&b alpha:&a])
         return [UIColor colorWithHue:h
                           saturation:s
@@ -646,7 +646,7 @@
             CFStringRef stringRef = (__bridge CFStringRef)currentItem;
             CFMutableAttributedStringRef attrStr = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
             CFAttributedStringReplaceString (attrStr, CFRangeMake(0, 0), stringRef);
-            CTTextAlignment alignment = kCTJustifiedTextAlignment;
+            CTTextAlignment alignment = kCTTextAlignmentJustified;
             CTParagraphStyleSetting _settings[] = { {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment} };
             CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(_settings, sizeof(_settings) / sizeof(_settings[0]));
             CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, CFAttributedStringGetLength(attrStr)), kCTParagraphStyleAttributeName, paragraphStyle);
@@ -825,7 +825,7 @@
         
         // if we do not need the fading curtain we can use simple CALayer
         if (!self.gradientLayer) {
-            self.gradientLayer = [CALayer layer];
+            self.gradientLayer = (CAGradientLayer *)[CALayer layer];
             [self.layer insertSublayer:self.gradientLayer atIndex:0];
         }
         self.gradientLayer.backgroundColor = self.curtainColor.CGColor;
@@ -956,87 +956,5 @@
 
     
 }
-
-// drawing text labels for test purposes only
-- (void)drawLabel:(NSString *)label withFont:(UIFont *)font forSize:(CGSize)size
-          atPoint:(CGPoint)point withAlignment:(NSTextAlignment)alignment lineBreakMode:(NSLineBreakMode)lineBreak color:(UIColor *)color
-{
-    if (debug == 1) {
-        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
-    }
-    
-    // obtain current context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // save context state first
-    CGContextSaveGState(context);
-    
-    
-    // obtain size of drawn label
-    CGSize newSize = [label sizeWithFont:font
-                       constrainedToSize:size
-                           lineBreakMode:lineBreak];
-    
-    // determine correct rect for this label
-    CGRect rect = CGRectMake(point.x, point.y,
-                             newSize.width, newSize.height);
-    
-    // set text color in context
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    
-    // draw text
-    [label drawInRect:rect
-             withFont:font
-        lineBreakMode:lineBreak
-            alignment:alignment];
-    
-    // restore context state
-    CGContextRestoreGState(context);
-}
-
-
-// drawing rectangles - for test purposes only
-- (void)drawTestRectangleAtPoint:(CGPoint)p withSize:(CGSize)size red:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
-{
-    if (debug == 1) {
-        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
-    }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    CGContextSetRGBFillColor(context, red, green, blue, alpha);
-    CGContextBeginPath(context);
-    CGRect rect = CGRectMake(p.x, p.y, size.width, size.height);
-    CGContextAddRect(context, rect);
-    CGContextFillPath(context);
-    CGContextRestoreGState(context);
-}
-
-// our drawRect - for test purposee only
-- (void)drawRect:(CGRect)rect
-{
-    if (debug == 1) {
-        NSLog(@"Running %@ '%@'",self.class, NSStringFromSelector(_cmd));
-    }
-    
-    if (self.dot) {
-        [self drawTestRectangleAtPoint:CGPointMake(self.bounds.size.width / 2.0 - 100.0, self.bounds.size.height / 2.0 - 100.0)
-                              withSize:CGSizeMake(200.0, 200.0)
-                                   red:1.0
-                                 green:1.0
-                                  blue:1.0
-                                 alpha:1.0];
-        
-        [self drawLabel:@"Index for tableView designed by mateusz@ nuckowski.com"
-               withFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:25.0]
-                forSize:CGSizeMake(175.0, 150.0)
-                atPoint:CGPointMake(self.bounds.size.width / 2.0 - 78.0, self.bounds.size.height / 2.0 - 80.0)
-          withAlignment:NSTextAlignmentCenter
-          lineBreakMode:NSLineBreakByWordWrapping
-                  color:[UIColor colorWithRed:0.0 green:105.0/255.0 blue:240.0/255.0 alpha:1.0]];
-    }
-
-}
-
 
 @end
