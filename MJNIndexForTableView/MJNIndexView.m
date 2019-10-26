@@ -422,7 +422,7 @@
             NSCache *itemAttributes = [@{@"item":item,
                                                    @"origin":newValueForPoint,
                                                    @"position":newValueForPoint,
-                                                   @"font":(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL),
+                                                   @"font":self.font,
                                                    @"color":self.fontColor,
                                                    @"alpha":alpha,
                                                    @"zPosition":zPosition,
@@ -454,7 +454,7 @@
     for (NSCache *itemAttributes in self.itemsAtrributes){
         CGPoint origin = [[itemAttributes objectForKey:@"origin"] CGPointValue];
         [itemAttributes setObject:[NSValue valueWithCGPoint:origin] forKey:@"position"];
-        [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
+        [itemAttributes setObject:self.font forKey:@"font"];
         [itemAttributes setObject:@(1.0) forKey:@"alpha"];
         [itemAttributes setObject:self.fontColor forKey:@"color"];
         [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
@@ -537,8 +537,9 @@
                 alpha = colorChange;
             } else alpha = 1.0;
            
-            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, fontSize, NULL) forKey:@"font"];
-            
+            [itemAttributes setObject:[self.font fontWithSize:fontSize]
+                               forKey:@"font"];
+
             [itemAttributes setObject:fontColor forKey:@"color"];
             
             // checking if the item is the most deflected one -> it means it is the selected one 
@@ -552,7 +553,8 @@
             if (selectedInRange || firstItemInRange || lastItemInRange) {
                 alpha = 1.0;
                 
-                [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.selectedItemFont.fontName, fontSize, NULL) forKey:@"font"];
+                [itemAttributes setObject:[self.font fontWithSize:fontSize]
+                                   forKey:@"font"];
                 [itemAttributes setObject:self.selectedItemFontColor forKey:@"color"];
                 [itemAttributes setObject:@(10.0) forKey:@"zPosition"];
                 if (!self.getSelectedItemsAfterPanGestureIsFinished && [self.section integerValue] != section) {
@@ -572,7 +574,7 @@
             
             point.x = origin.x;
             alpha = 1.0;
-            [itemAttributes setObject:(__bridge_transfer id)CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL) forKey:@"font"];
+            [itemAttributes setObject:self.font forKey:@"font"];
             fontColor = self.fontColor;
             [itemAttributes setObject:self.fontColor forKey:@"color"];
             [itemAttributes setObject:@(5.0) forKey:@"zPosition"];
