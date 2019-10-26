@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MJNIndexView'
-  s.version          = '1.1.1
+  s.version          = '1.1.1'
   s.summary          = 'MJNIndexView is a highly customizable index for UITableView'
 
 # This description is used to generate tags and improve search results.
