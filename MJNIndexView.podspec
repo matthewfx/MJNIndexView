@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MJNIndexView'
-  s.version          = '0.9.0'
+  s.version          = '1.1.1
   s.summary          = 'MJNIndexView is a highly customizable index for UITableView'
 
 # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author           = { 'matthewfx' => 'mat@nuckowski.com' }
-  s.source           = { :git => 'https://github.com/matthewfx/MJNIndexView.git', :commit => 'ce6f04b1df50513f05daa1edb2c6fa93a6a49482'}
+  s.source           = { :git => 'https://github.com/matthewfx/MJNIndexView.git', :tag => '1.1.1'}
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
